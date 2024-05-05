@@ -16,7 +16,7 @@ context = ssl.create_default_context()
 
 # CODE FOR SENDING OTP
 email_sender = 'shourya.development.studio@gmail.com'
-email_password = "geayouagpimwcbvp"
+email_password = "whcuupwtthmommhp"
 em = EmailMessage()
 em['From'] = email_sender
 """  subject = 'Transaction Update!'
@@ -49,6 +49,8 @@ if processor.check_db():
         os.system('cls')
         print(f'FIRST TIME LOGIN DETECTED! \n ')
         license_key = input(f'enter your license: ')
+        license_key_exist = processor.license_collection.count_documents({"license": license_key})
+        result = license_key_exist if license_key_exist!=0 else processor.exit()
         dealer_2fa = input(f'enter dealer generated password: ')
         password_2fa = input(f'enter a password for 2fa: ')
         username_user_entered=input(f'enter username to link: ')
@@ -94,22 +96,23 @@ if processor.check_db():
            if result.modified_count > 0:
                print("Data updated! Re-login.")
            else:
-               print("Invalid license key!")
+               print(" FAILED TO UPDATE DATA (Invalid license key!) ")
     else:
-        print(f'PREVIOUS LOGIN DETECTED! ')
-        uniqueid, ip, password_license = processor.license_verification()
-
-        Password_verification = input(f'please enter your password linked with your license : ')
-        if uniqueid == processor.huid and ip == processor.ip_address and password_license == Password_verification:
-            os.system('cls')
-            print(f'credentials verified \n')
-            
-            
-            # Inputs for license creation
-            licensename = input("Please enter your license key to create: ")
-            processor.license_create(licensename)
-        else:
-            print("unable to verify credentials")
+          print(f'PREVIOUS LOGIN DETECTED! ')
+          uniqueid, ip, password_license = processor.license_verification()
+   
+          Password_verification = input(f'please enter your password linked with your license : ')
+          if uniqueid == processor.huid and ip == processor.ip_address and password_license == Password_verification:
+              os.system('cls')
+              print(f'credentials verified \n')
+              
+              
+              # Inputs for license creation
+              licensename = input("Please enter your license key to create: ")
+              processor.license_create(licensename)
+          else:
+              print("unable to verify credentials")
+        
 else:
     print("Connection to database unsuccessful.")
 

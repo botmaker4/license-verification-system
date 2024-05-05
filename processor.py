@@ -1,5 +1,5 @@
 # processor.py
-
+import sys
 import socket
 import random
 import string
@@ -120,3 +120,7 @@ def otp_verification(system_generated,user_entered):
     else:
         print(f'Invalid otp!')
         return False
+    
+def exit():
+    print("Exiting..")
+    sys.exit(1)
