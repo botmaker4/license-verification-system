@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from colorama import Fore
 from datetime import datetime, date
 # Database credentials and defined
-cluster = "mongodb+srv://xavierlol:01632987@cluster0.usjq3sl.mongodb.net/LOGINDATA?retryWrites=true&w=majority"
+cluster = "mongodb+srv://xavierlol:FNKq6uqLPrvMkviZ@cluster0.usjq3sl.mongodb.net/LOGINDATA?retryWrites=true&w=majority"
 client = MongoClient(cluster)
 db = client['Licenseverification']
 license_collection = db['License']
