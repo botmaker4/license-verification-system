@@ -74,6 +74,7 @@ if processor.check_db():
          user_entered_otp = input(f'please enter your otp: ')
          correct_otp =  processor.otp_verification(email_verification_otp,user_entered_otp)
          if correct_otp:
+             
            old_data = {"license": license_key, "huid": "NONE" , "password":dealer_2fa}
        
            # Define the new values to set
@@ -96,12 +97,13 @@ if processor.check_db():
                print("Invalid license key!")
     else:
         print(f'PREVIOUS LOGIN DETECTED! ')
-        uniqueid, ip, password_license = processor.license_verification(processor.huid, processor.ip_address)
+        uniqueid, ip, password_license = processor.license_verification()
 
         Password_verification = input(f'please enter your password linked with your license : ')
         if uniqueid == processor.huid and ip == processor.ip_address and password_license == Password_verification:
-            print(f'credentials verified \n')
             os.system('cls')
+            print(f'credentials verified \n')
+            
             
             # Inputs for license creation
             licensename = input("Please enter your license key to create: ")

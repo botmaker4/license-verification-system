@@ -46,7 +46,7 @@ def generate_password_string(length=10):
 
 
 
-def license_verification(huid, ip_address):
+def license_verification():
     try:
         for x in license_collection.find({"huid": huid, "ip": ip_address}, {'_id': 0}):
             a = "NONE"
@@ -59,10 +59,12 @@ def license_verification(huid, ip_address):
                     b = value
                 elif 'password' in key:
                     c = value
-                    return a, b, c
+           
+            return a, b, c
     except Exception as e:
         print(f"An error occurred: {e}")
         return None, None, None
+
 
 
 def license_create(licensename):
