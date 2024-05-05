@@ -15,7 +15,7 @@ import ssl
 context = ssl.create_default_context()
 
 # CODE FOR SENDING OTP
-email_sender = 'shourya.development.studio@gmail.com'
+email_sender = '(name).development.studio@gmail.com'
 email_password = "whcuupwtthmommhp"
 em = EmailMessage()
 em['From'] = email_sender
