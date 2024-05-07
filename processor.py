@@ -7,6 +7,20 @@ from getmac import get_mac_address as gma
 from pymongo import MongoClient
 from colorama import Fore
 from datetime import datetime, date
+
+import smtplib
+import os
+import ssl
+from email.message import EmailMessage
+# Add SSL (layer of security)
+import ssl
+context = ssl.create_default_context()
+
+# CODE FOR SENDING OTP
+email_sender = 'shourya.development.studio@gmail.com'
+email_password = "whcuupwtthmommhp"
+em = EmailMessage()
+em['From'] = email_sender
 # Database credentials and defined
 cluster = "mongodb+srv://xavierlol:FNKq6uqLPrvMkviZ@cluster0.usjq3sl.mongodb.net/LOGINDATA?retryWrites=true&w=majority"
 client = MongoClient(cluster)
@@ -67,10 +81,11 @@ def license_verification():
 
 
 
-def license_create(licensename):
+def license_create(licensename,email_address,subject,message,exiting_message):
     # Find the document with the highest ID
    highest_id_doc = license_collection.find_one({}, sort=[("_id", -1)])
    auto_password_generated = generate_password_string()
+   message = message + auto_password_generated
 # Check if a document with the highest ID exists
    if highest_id_doc:
        
@@ -93,6 +108,9 @@ def license_create(licensename):
     }
     create = license_collection.insert_one(license_information)
     print('License created')
+    if email_address!="NONE":
+     send_email(email_address,subject,message,exiting_message)
+    
     
    #CREATING LICENSE WITH ID 0 
    else:
@@ -124,3 +142,18 @@ def otp_verification(system_generated,user_entered):
 def exit():
     print("Exiting..")
     sys.exit(1)
+    
+def send_email(email_address,subject,message,exiting_message):
+    print(f'verifying with the server! ')
+    subject = subject
+    em['Subject'] =str(subject)
+    em['To'] = email_address
+    message=str(message)
+    message=str(message)
+    em.set_content(message)
+    # Log in and send the email
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+     smtp.login(email_sender, email_password)
+     smtp.sendmail(email_sender, email_address, em.as_string())
+     print(exiting_message)
+     return True

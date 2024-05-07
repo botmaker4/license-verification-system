@@ -58,21 +58,12 @@ if processor.check_db():
        
         #VERIFICATION OF EMAIL ADDRESS
         os.system('cls')
-        print(f'verifying with the server! ')
         email_verification_otp = random.randint(1000,9999)
-        subject = 'Email Verifiation'
-        em['Subject'] = subject
-        em['To'] = email_address
-        message=f"Your email verification code is {email_verification_otp} . Do not share!"
-        email_verification_otp=str(email_verification_otp)
-        message=str(message)
-        em.set_content(message)
-        
-       # Log in and send the email
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-         smtp.login(email_sender, email_password)
-         smtp.sendmail(email_sender, email_address, em.as_string())
-         print(f"OTP has been sent! ")
+        subject = f'Email Verification'
+        exiting_message = f'Otp sent!'
+        message = f"Your email verification code is {email_verification_otp} . Do not share!"
+        if processor.send_email(email_address,subject,message,exiting_message ) ==True:
+
          user_entered_otp = input(f'please enter your otp: ')
          correct_otp =  processor.otp_verification(email_verification_otp,user_entered_otp)
          if correct_otp:
@@ -109,6 +100,12 @@ if processor.check_db():
               
               # Inputs for license creation
               licensename = input("Please enter your license key to create: ")
+              email_address=input("enter users email / NONE ")
+              subject=f"License details"
+              message = f"""your license details are - 
+              license key - {licensename}
+              dealer-generated password - """
+              exiting_message = "Details sent!"
               processor.license_create(licensename)
           else:
               print("unable to verify credentials")
