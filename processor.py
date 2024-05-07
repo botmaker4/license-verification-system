@@ -71,6 +71,7 @@ def license_verification():
             a = "NONE"
             b = "NONE"
             c = "NONE"
+            d = "NONE"
             for key, value in x.items():
                 if 'huid' in key:
                     a = value
@@ -78,8 +79,10 @@ def license_verification():
                     b = value
                 elif 'password' in key:
                     c = value
+                elif 'power' in key:
+                    d = value
            
-            return a, b, c
+            return a, b, c , d
     except Exception as e:
         print(f"An error occurred: {e}")
         return None, None, None
@@ -162,3 +165,52 @@ def send_email(email_address,subject,message,exiting_message):
      smtp.sendmail(email_sender, email_address, em.as_string())
      print(exiting_message)
      return True
+ 
+ # Function to get public IP address
+def get_public_ip():
+    try:
+        # Using a public API to fetch public IP address
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.connect(("8.8.8.8", 80))
+            public_ip = s.getsockname()[0]
+        return public_ip
+    except Exception as e:
+        print("Failed to get public IP address:", e)
+        return None
+
+
+#OPTIONS SELECTION - USER
+
+def show_menu():
+    print("Select an option:")
+    print("1. view license details")
+    print("2. change username")
+    print("3. change password")
+    print("4. request custom license")
+    print("5. change email")
+    
+def get_choice():
+    while True:
+        choice = input("Enter the number of your choice: ")
+        if choice.isdigit() and int(choice) in [1, 2, 3,4,5]:
+            return int(choice)
+        else:
+            print("Invalid input. Please enter a number between 1 and 5.")
+
+def main():
+    show_menu()
+    choice = get_choice()
+
+    if choice == 1:
+        print("You selected Option 1.")
+    elif choice == 2:
+        print("You selected Option 2.")
+    elif choice == 3:
+        print("You selected Option 3.")
+    elif choice == 4:
+        print("You selected Option 4.")
+    elif choice == 5:
+        print("You selected Option 5.")
+    return choice
+
+
