@@ -22,7 +22,7 @@ email_password = "whcuupwtthmommhp"
 em = EmailMessage()
 em['From'] = email_sender
 # Database credentials and defined
-cluster = "mongodb+srv://xavierlol:FNKq6uqLPrvMkviZ@cluster0.usjq3sl.mongodb.net/LOGINDATA?retryWrites=true&w=majority"
+cluster = "mongodb+srv://(name)lol:FNKq6uqLPrvMkviZ@cluster0.usjq3sl.mongodb.net/LOGINDATA?retryWrites=true&w=majority"
 client = MongoClient(cluster)
 db = client['Licenseverification']
 license_collection = db['License']
