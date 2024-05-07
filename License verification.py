@@ -1,34 +1,11 @@
 # main.py
-
 import sys
 import socket
 from datetime import datetime
 from colorama import Fore, init
 import processor
-import smtplib
 import os
-import ssl
 import random
-from email.message import EmailMessage
-# Add SSL (layer of security)
-import ssl
-context = ssl.create_default_context()
-
-# CODE FOR SENDING OTP
-email_sender = 'shourya.development.studio@gmail.com'
-email_password = "whcuupwtthmommhp"
-em = EmailMessage()
-em['From'] = email_sender
-"""  subject = 'Transaction Update!'
-                          em['Subject'] = subject
-                          em['To'] = sender_email
-                          message=f"Your otp for amount {amount_to_receive} is {otp} \nRequested by {bank_name}"
-                          message=str(message)
-                          em.set_content(message)
-                         # Log in and send the email
-                          with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-                           smtp.login(email_sender, email_password)
-                           smtp.sendmail(email_sender, sender_email, em.as_string())"""
 # Initialize colorama
 init(autoreset=True)
 
@@ -106,7 +83,7 @@ if processor.check_db():
               license key - {licensename}
               dealer-generated password - """
               exiting_message = "Details sent!"
-              processor.license_create(licensename)
+              processor.license_create(licensename,email_address,subject,message,exiting_message)
           else:
               print("unable to verify credentials")
         

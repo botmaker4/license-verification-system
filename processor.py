@@ -1,29 +1,34 @@
 # processor.py
 import sys
 import socket
+import json
 import random
 import string
 from getmac import get_mac_address as gma
 from pymongo import MongoClient
 from colorama import Fore
 from datetime import datetime, date
-
 import smtplib
 import os
 import ssl
 from email.message import EmailMessage
-# Add SSL (layer of security)
+# Add SSL
+
 import ssl
 context = ssl.create_default_context()
 
-# CODE FOR SENDING OTP
-email_sender = 'shourya.development.studio@gmail.com'
-email_password = "whcuupwtthmommhp"
+#LOADING CREDENTIALS
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
+email_sender = config['email_sender']
+email_password = config['email_password']
+mongo_cluster = config['mongo_cluster']
+
+
 em = EmailMessage()
 em['From'] = email_sender
-# Database credentials and defined
-cluster = "mongodb+srv://xavierlol:FNKq6uqLPrvMkviZ@cluster0.usjq3sl.mongodb.net/LOGINDATA?retryWrites=true&w=majority"
-client = MongoClient(cluster)
+client = MongoClient(mongo_cluster)
 db = client['Licenseverification']
 license_collection = db['License']
 connection_true=Fore.YELLOW+" CONNECTION TO DATABASE SUCCESSFUL "
