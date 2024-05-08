@@ -2,4 +2,9 @@ config.json
 dump.txt
 __pycache__
 __pycache__/processor.cpython-312.pyc
-logsfetch.py
+
+./user_logs/
+C:\coding\License verification project\user_logs
+user_logs/user_logs.log
+__pycache__/processor.cpython-312.pyc
+__pycache__/processor.cpython-312.pyc
